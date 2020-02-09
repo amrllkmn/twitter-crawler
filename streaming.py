@@ -15,11 +15,18 @@ class StdOutListener(StreamListener):
     """ A listener handles tweets that are received from the stream.
     This is a basic listener that just prints received tweets to stdout.
     """
-    def on_data(self,data):
-        print(data)
-        return True
-    
-    def on_error(self, status):
-        print(status)
-    
+    def on_status(self, status):
+        print(status.text)
+
+    def on_error(self,status_code):
+        if status_code == 420:
+            return False
+
+if __name__ == '__main__':
+    listener = StdOutListener()
+    auth = OAuthHandler(consumer_token, consumer_secret)
+    auth.set_access_token(access_token, access_secret)
+
+    stream = Stream(auth, listener)
+    stream.filter(track=['Altered Carbon'], is_async=True)    
 
