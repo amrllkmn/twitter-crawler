@@ -9,3 +9,12 @@ To collect data from Twitter&reg; and perform data analytics as part of the Web 
 * Perform network analysis
 * Report findings
 
+## Tools used
+* Tweepy API
+* Twitter API
+
+## Updates
+
+* 9 February 2020
+    * Made the app on Twitter&reg; so credentials are obtained.
+
