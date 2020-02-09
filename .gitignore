@@ -132,4 +132,4 @@ dmypy.json
 .vscode/
 
 #Token files
-.\token.py
+tokens.py
