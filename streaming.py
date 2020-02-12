@@ -16,17 +16,23 @@ class StdOutListener(StreamListener):
     This is a basic listener that just prints received tweets to stdout.
     """
     def on_status(self, status):
-        print(status.text)
+        #Testing to print a number of tweets
+        i = 0
+        while(i<5):
+            print(status.text)
+            i+=1
+        return False
 
     def on_error(self,status_code):
         if status_code == 420:
             return False
 
 if __name__ == '__main__':
+    print("It's streaming...\n")
     listener = StdOutListener()
     auth = OAuthHandler(consumer_token, consumer_secret)
     auth.set_access_token(access_token, access_secret)
 
     stream = Stream(auth, listener)
-    stream.filter(track=['Altered Carbon'], is_async=True)    
-
+    stream.filter(track=['banana'], is_async=True)    
+# Trying to store it as a JSON file
