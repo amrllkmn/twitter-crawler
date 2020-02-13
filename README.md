@@ -17,4 +17,6 @@ To collect data from Twitter&reg; and perform data analytics as part of the Web 
 
 * 9 February 2020
     * Made the app on Twitter&reg; so credentials are obtained.
+* 13 February 2020
+    * The app can now store tweets collected.
 
