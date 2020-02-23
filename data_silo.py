@@ -1,9 +1,4 @@
 import pymongo
+import dns
 
-
-client = pymongo.MongoClient('mongodb+srv://amrllkmn:twtcrawler2011@twtcrawler-ziohm.mongodb.net/test?retryWrites=true&w=majority')
-db = client.test
-
-result = db.count_doc.insert_one({'x':1})
-
-print(result)
+client = pymongo.MongoClient('mongodb+srv://amrllkmn:TwitterWebCrawling@database-pkr2p.mongodb.net/test?retryWrites=true&w=majority')

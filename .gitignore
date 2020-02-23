@@ -133,6 +133,6 @@ dmypy.json
 
 #Token files
 tokens.py
+data_silo.py
 
 #twitter data
-twitter_data.json
