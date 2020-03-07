@@ -15,27 +15,34 @@ access_secret = t.access_token_secret
 
 class StdOutListener(StreamListener):
     """ A listener handles tweets that are received from the stream.
-    The listener collects exactly 5 tweets.
+    The listener collects as much tweets as possible
     """
+    def __init__(self):
+        self.count = 0
 
     def on_data(self,data):
-        try:
+        #try:
+            if self.count < 5:
                 j_data = j.loads(data)
-                d.db.twt_data.insert_one(j_data)
+                d.db.altered_carbon.insert_one(j_data)
+                self.count +=1
+                print(self.count)
                 return True
+            else:
+                return False
+        #except Exception as e:
+           # print(e)
+           # return False
 
-        except Exception as e:
-            print(e)
-            return False
     def on_error(self,status):
         print(status)
 
 if __name__ == '__main__':
     print("It's streaming...\n")
-    listener = StdOutListener(5)
+    listener = StdOutListener()
     auth = OAuthHandler(consumer_token, consumer_secret)
     auth.set_access_token(access_token, access_secret)
 
     stream = Stream(auth, listener)
-    stream.filter(track=['Tesla'], is_async=True)
+    stream.filter(track=['Altered Carbon'], is_async=True)
     
