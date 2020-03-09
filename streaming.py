@@ -24,7 +24,7 @@ class StdOutListener(StreamListener):
         #try:
             if self.count < 5:
                 j_data = j.loads(data)
-                d.db.altered_carbon.insert_one(j_data)
+                d.db.ryo.insert_one(j_data)
                 self.count +=1
                 print(self.count)
                 return True
@@ -44,5 +44,5 @@ if __name__ == '__main__':
     auth.set_access_token(access_token, access_secret)
 
     stream = Stream(auth, listener)
-    stream.filter(track=['Altered Carbon'], is_async=True)
+    stream.filter(follow=['965329150922772481'], is_async=True)
     

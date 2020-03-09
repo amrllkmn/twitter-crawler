@@ -16,7 +16,7 @@ if __name__ == '__main__':
 
     database = d.db.REST_sample
 
-    cursor = Cursor(api.search,q="COVID-19", until="", count="100").items(1000)
+    cursor = Cursor(api.user_timeline,q="COVID-19", until="", count="100").items(1000)
 
     for items in cursor:
         all_data = items._json
