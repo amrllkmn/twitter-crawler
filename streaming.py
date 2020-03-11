@@ -16,7 +16,7 @@ access_secret = t.access_token_secret
 
 class StdOutListener(StreamListener):
     """ A listener handles tweets that are received from the stream.
-    The listener collects as much tweets as possible
+    The listener collects as much tweets as possible given the time limit in seconds
     """
     def __init__(self,timelimit=60):
         self.start = tm.time()
@@ -24,6 +24,7 @@ class StdOutListener(StreamListener):
         super(StdOutListener,self).__init__()
 
     def on_data(self,data):
+        """ Stores data in database, then returns true to continue stream, else disconnects stream """
         print(self.get_time())
         try:
             if(tm.time() - self.start) < self.limit:
@@ -36,9 +37,11 @@ class StdOutListener(StreamListener):
             return False
 
     def on_error(self,status):
+
         print(status)
     
     def get_time(self):
+        """ Return the time elapsed in seconds """
         return int(tm.time() - self.start)
 
 if __name__ == '__main__':
