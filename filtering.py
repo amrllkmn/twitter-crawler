@@ -2,6 +2,7 @@ import data_silo as d
 
 #collection = d.db['REST_sample'].find({'retweet_count': {'$t':1000}})
 
-print(d.getMostRetweeted('REST_sample'))
+print(d.getMostRetweeted('REST_sample')['user']['screen_name'])
+print(d.getMostLiked('REST_sample')['user']['screen_name'])
 
 

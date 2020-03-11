@@ -24,7 +24,7 @@ class StdOutListener(StreamListener):
         super(StdOutListener,self).__init__()
 
     def on_data(self,data):
-        """ Stores data in database, then returns true to continue stream, else disconnects stream """
+        #Stores data in database, then returns true to continue stream, else disconnects stream
         print(self.get_time())
         try:
             if(tm.time() - self.start) < self.limit:
