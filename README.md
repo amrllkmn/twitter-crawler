@@ -22,4 +22,6 @@ To collect data from Twitter&reg; and perform data analytics as part of the Web 
 * 8 March 2020
     * The REST API method has been created
     * Added a get most retweeted function, but quite slow (not sure why ...)
+* 11 March 2020
+    * The timer functionality has been added.
 
