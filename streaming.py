@@ -24,9 +24,10 @@ class StdOutListener(StreamListener):
         super(StdOutListener,self).__init__()
 
     def on_data(self,data):
+        print(self.get_time())
         try:
             if(tm.time() - self.start) < self.limit:
-                d.db.five_min.insert_one(j.loads(data))
+                d.db.castlevania_five_min.insert_one(j.loads(data)) #add document into collection
                 return True
             else:
                 return False
@@ -36,14 +37,17 @@ class StdOutListener(StreamListener):
 
     def on_error(self,status):
         print(status)
+    
+    def get_time(self):
+        return int(tm.time() - self.start)
 
 if __name__ == '__main__':
     print("It's streaming...\n")
-    listener = StdOutListener(300)
+    listener = StdOutListener(30)
     auth = OAuthHandler(consumer_token, consumer_secret)
     auth.set_access_token(access_token, access_secret)
 
     stream = Stream(auth, listener)
-    stream.filter(track=['COVID-19'], is_async=True)
+    stream.filter(track=['Castlevania'], is_async=True)
     
     
