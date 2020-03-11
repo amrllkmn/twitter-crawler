@@ -6,6 +6,7 @@ from tweepy import OAuthHandler, Stream, StreamListener
 import tokens as t
 import json as j
 import data_silo as d
+import time as tm
 
 consumer_token = t.consumer_key
 consumer_secret = t.consumer_secret
@@ -15,34 +16,41 @@ access_secret = t.access_token_secret
 
 class StdOutListener(StreamListener):
     """ A listener handles tweets that are received from the stream.
-    The listener collects as much tweets as possible
+    The listener collects as much tweets as possible given the time limit in seconds
     """
-    def __init__(self):
-        self.count = 0
+    def __init__(self,timelimit=60):
+        self.start = tm.time()
+        self.limit = timelimit
+        super(StdOutListener,self).__init__()
 
     def on_data(self,data):
-        #try:
-            if self.count < 5:
-                j_data = j.loads(data)
-                d.db.ryo.insert_one(j_data)
-                self.count +=1
-                print(self.count)
+        """ Stores data in database, then returns true to continue stream, else disconnects stream """
+        print(self.get_time())
+        try:
+            if(tm.time() - self.start) < self.limit:
+                d.db.castlevania_five_min.insert_one(j.loads(data)) #add document into collection
                 return True
             else:
                 return False
-        #except Exception as e:
-           # print(e)
-           # return False
+        except Exception as e:
+            print(e)
+            return False
 
     def on_error(self,status):
+
         print(status)
+    
+    def get_time(self):
+        """ Return the time elapsed in seconds """
+        return int(tm.time() - self.start)
 
 if __name__ == '__main__':
     print("It's streaming...\n")
-    listener = StdOutListener()
+    listener = StdOutListener(30)
     auth = OAuthHandler(consumer_token, consumer_secret)
     auth.set_access_token(access_token, access_secret)
 
     stream = Stream(auth, listener)
-    stream.filter(follow=['965329150922772481'], is_async=True)
+    stream.filter(track=['Castlevania'], is_async=True)
+    
     
