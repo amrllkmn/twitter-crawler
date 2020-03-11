@@ -34,19 +34,6 @@ class StdOutListener(StreamListener):
             print(e)
             return False
 
-        #try:
-        #    if self.count < 5:
-        #        j_data = j.loads(data)
-        #        d.db.altered_carbon.insert_one(j_data)
-        #        self.count +=1
-        #        print(self.count)
-        #        return True
-        #    else:
-        #        return False
-        #except Exception as e:
-           # print(e)
-           # return False
-
     def on_error(self,status):
         print(status)
 
