@@ -21,16 +21,28 @@ class StdOutListener(StreamListener):
     def __init__(self,timelimit=60):
         self.start = tm.time()
         self.limit = timelimit
+        self.file = open("tweets.json","w", encoding="utf-8")
+        self.list = []
+        self.buf_list = []
         super(StdOutListener,self).__init__()
 
     def on_data(self,data):
         #Stores data in database, then returns true to continue stream, else disconnects stream
         print(self.get_time())
         try:
+            
             if(tm.time() - self.start) < self.limit:
-                d.db.castlevania_five_min.insert_one(j.loads(data)) #add document into collection
+                    #d.db.castlevania_five_min.insert_one(j.loads(data)) #add document into collection
+                tweet = j.loads(data)
+                self.list.append(tweet)
+                if len(self.list) > 100:
+                    self.buf_list+=self.list
+                    self.list = []
+                    print(len(self.buf_list))
                 return True
             else:
+                j.dump(self.buf_list,self.file, indent=4)
+                self.file.close()
                 return False
         except Exception as e:
             print(e)
@@ -46,11 +58,11 @@ class StdOutListener(StreamListener):
 
 if __name__ == '__main__':
     print("It's streaming...\n")
-    listener = StdOutListener(30)
+    listener = StdOutListener(15)
     auth = OAuthHandler(consumer_token, consumer_secret)
     auth.set_access_token(access_token, access_secret)
 
     stream = Stream(auth, listener)
-    stream.filter(track=['Castlevania'], is_async=True)
+    stream.filter(track=['I'], is_async=True)
     
     
