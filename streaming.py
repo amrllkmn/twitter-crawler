@@ -21,7 +21,7 @@ class StdOutListener(StreamListener):
     def __init__(self,timelimit=60):
         self.start = tm.time()
         self.limit = timelimit
-        self.file = open("tweets.json","w", encoding="utf-8")
+        self.file = open("tweets_2.json","w", encoding="utf-8")
         self.list = []
         self.buf_list = []
         super(StdOutListener,self).__init__()
@@ -35,10 +35,10 @@ class StdOutListener(StreamListener):
                     #d.db.castlevania_five_min.insert_one(j.loads(data)) #add document into collection
                 tweet = j.loads(data)
                 self.list.append(tweet)
-                if len(self.list) > 100:
+                if len(self.list) > 1000:
                     self.buf_list+=self.list
                     self.list = []
-                    print(len(self.buf_list))
+                    #print(len(self.buf_list))
                 return True
             else:
                 j.dump(self.buf_list,self.file, indent=4)
@@ -58,11 +58,11 @@ class StdOutListener(StreamListener):
 
 if __name__ == '__main__':
     print("It's streaming...\n")
-    listener = StdOutListener(15)
+    listener = StdOutListener(1800)
     auth = OAuthHandler(consumer_token, consumer_secret)
     auth.set_access_token(access_token, access_secret)
 
     stream = Stream(auth, listener)
-    stream.filter(track=['I'], is_async=True)
+    stream.filter(track=['the','of', 'and', 'a', 'to'], locations=[-124.7771694, 24.520833, -66.947028, 49.384472], languages=["en"], is_async=True)
     
     
