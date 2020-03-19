@@ -32,16 +32,14 @@ class StdOutListener(StreamListener):
         try:
             
             if(tm.time() - self.start) < self.limit:
-                    #d.db.castlevania_five_min.insert_one(j.loads(data)) #add document into collection
                 tweet = j.loads(data)
-                self.list.append(tweet)
+                self.list.append(tweet) #add tweet to list
                 if len(self.list) > 1000:
-                    self.buf_list+=self.list
+                    self.buf_list+=self.list #add list to buffer
                     self.list = []
-                    #print(len(self.buf_list))
                 return True
             else:
-                j.dump(self.buf_list,self.file, indent=4)
+                j.dump(self.buf_list,self.file, indent=4) #store in json file
                 self.file.close()
                 return False
         except Exception as e:
