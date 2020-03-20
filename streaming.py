@@ -2,11 +2,10 @@
 #Name: Amirul Lokman Jamaludin
 #GUID: 2259783j
 
-from tweepy import OAuthHandler, Stream, StreamListener
+import imports as im
 import tokens as t
 import json as j
 import data_silo as d
-import time as tm
 
 consumer_token = t.consumer_key
 consumer_secret = t.consumer_secret
@@ -14,12 +13,12 @@ consumer_secret = t.consumer_secret
 access_token = t.access_token
 access_secret = t.access_token_secret
 
-class StdOutListener(StreamListener):
+class StdOutListener(im.StreamListener):
     """ A listener handles tweets that are received from the stream.
     The listener collects as much tweets as possible given the time limit in seconds
     """
     def __init__(self,timelimit=60):
-        self.start = tm.time()
+        self.start = im.time.time()
         self.limit = timelimit
         self.file = open("tweets_2.json","w", encoding="utf-8")
         self.list = []
@@ -31,7 +30,7 @@ class StdOutListener(StreamListener):
         print(self.get_time())
         try:
             
-            if(tm.time() - self.start) < self.limit:
+            if(im.time.time() - self.start) < self.limit:
                 tweet = j.loads(data)
                 self.list.append(tweet) #add tweet to list
                 if len(self.list) > 1000:
@@ -52,15 +51,15 @@ class StdOutListener(StreamListener):
     
     def get_time(self):
         """ Return the time elapsed in seconds """
-        return int(tm.time() - self.start)
+        return int(im.time.time() - self.start)
 
 if __name__ == '__main__':
     print("It's streaming...\n")
     listener = StdOutListener(1800)
-    auth = OAuthHandler(consumer_token, consumer_secret)
+    auth = im.OAuthHandler(consumer_token, consumer_secret)
     auth.set_access_token(access_token, access_secret)
 
-    stream = Stream(auth, listener)
+    stream = im.Stream(auth, listener)
     stream.filter(track=['the','of', 'and', 'a', 'to'], locations=[-124.7771694, 24.520833, -66.947028, 49.384472], languages=["en"], is_async=True)
     
     

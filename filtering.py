@@ -1,12 +1,11 @@
 import data_silo as d
-import time
-import pymongo
+import imports as im
 #collection = d.db['REST_sample'].find({'retweet_count': {'$t':1000}})
 
 collection = d.getCollection("tweet_dump")
 
 array = []
-x = time.time()
+x = im.time.time()
 for docs in collection.find():
    try:
        if docs["retweeted_status"]["truncated"] == True:
@@ -18,14 +17,14 @@ for docs in collection.find():
            array.append({"id":docs["id"], "created_at":docs["created_at"], "text":docs["extended_tweet"]["full_text"], "user":docs["user"], "retweet_count":docs["retweet_count"]})
        else:
            array.append({"id":docs["id"], "created_at":docs["created_at"], "text":docs["text"], "user":docs["user"],"retweet_count":docs["retweet_count"]})
-print(time.time() - x)
+print(im.time.time() - x)
 
 database = d.db.filtered
 database.create_index("id",unique=True)
 try:
     print("Inserting...")
     database.insert_many(array,ordered=False)
-except pymongo.errors.BulkWriteError as bwe:
+except im.pymongo.errors.BulkWriteError as bwe:
     for err in bwe.details["writeErrors"]:
         if int(err['code']) == 11000:
             pass

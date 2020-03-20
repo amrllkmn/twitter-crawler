@@ -1,4 +1,4 @@
-from tweepy import OAuthHandler, API, Cursor
+import imports as im
 import tokens as t
 import data_silo as d
 import pymongo
@@ -19,22 +19,22 @@ if __name__ == '__main__':
 
     topUsers = d.getMostRetweetedNames("filtered") #['MrBeastYT', 'pulte', 'elonmusk', 'BTS_twt', 'samsmith', 'Louis_Tomlinson', 'SethAbramson', 'evanmcmurry', 'maxbrooksauthor', 'EricHaywood']
 
-    auth = OAuthHandler(consumer_token,consumer_secret)
+    auth = im.OAuthHandler(consumer_token,consumer_secret)
     auth.set_access_token(access_token,access_secret)
 
-    api = API(auth,wait_on_rate_limit=True)
+    api = im.API(auth,wait_on_rate_limit=True)
 
     master_buf = []
     for i in range(len(keywords)):
         buffer = []
-        for status in Cursor(api.search,q=keywords[i], lang="en",since="2020-03-12", until="2020-03-19").items(2000):
+        for status in im.Cursor(api.search,q=keywords[i], lang="en",since="2020-03-12", until="2020-03-19").items(2000):
             buffer.append(status._json)
         master_buf+=buffer
         print(keywords[i]+" is complete.")
     
     for i in range(len(topUsers)):
         buffer = []
-        for status in Cursor(api.user_timeline, screen_name=topUsers[i], count="200").items(2000):
+        for status in im.Cursor(api.user_timeline, screen_name=topUsers[i], count="200").items(2000):
             buffer.append(status._json)
         master_buf+=buffer
         print(topUsers[i]+" is complete.")
