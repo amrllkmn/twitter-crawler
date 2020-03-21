@@ -62,7 +62,9 @@ prediction = kmeans.predict(Y_sklearn)
 
 print("Listing top words in each cluster...")
 dfs = get_top_features_cluster(tf_idf_array, prediction, 15)
-print(dfs)
+for i in dfs:
+    print(i)
+    print('\n')
 """
 number_clusters = range(1, 7)
 

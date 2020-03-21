@@ -4,7 +4,6 @@ import pandas as pd # data processing, CSV file I/O (e.g. pd.read_csv)
 import nltk
 import time
 import dns
-from tweepy import OAuthHandler, Stream, StreamListener,API, Cursor
 from sklearn.cluster import KMeans 
 from sklearn.feature_extraction.text import TfidfVectorizer
 from sklearn.decomposition import PCA
