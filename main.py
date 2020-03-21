@@ -3,8 +3,6 @@ import streaming
 import tokens
 
 if __name__ == '__main__':
-    print("It's streaming...\n")
-
     consumer_token  = tokens.consumer_key
     consumer_secret = tokens.consumer_secret
     access_token    = tokens.access_token
