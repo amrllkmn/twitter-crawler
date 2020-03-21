@@ -1,6 +1,9 @@
 import imports
 import streaming
 import tokens
+import filtering
+import data_silo
+import dumping
 
 if __name__ == '__main__':
     consumer_token  = tokens.consumer_key
@@ -14,4 +17,9 @@ if __name__ == '__main__':
 
     stream = streaming.Stream(auth, listener)
     stream.filter(track=["I"], locations=[-124.7771694, 24.520833, -66.947028, 49.384472], languages=["en"], is_async=True)
+
+    while listener.isDoneStreaming() is not True:
+        continue
+    dumping.dumping(listener.getFilename())
+    
 

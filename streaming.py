@@ -21,8 +21,10 @@ class StdOutListener(StreamListener):
     def __init__(self,timelimit=60):
         self.start = time.time()
         self.limit = timelimit
-        self.file = open("tweets.json","w", encoding="utf-8")
+        self.filename = "tweets.json"
+        self.file = open(self.filename,"w", encoding="utf-8")
         self.list = []
+        self.done = False
         self.buf_list = []
         print(str(self.limit)+" seconds to stream.")
         print("Begin streaming...")
@@ -44,16 +46,23 @@ class StdOutListener(StreamListener):
                 j.dump(self.buf_list,self.file, indent=4) #store in json file
                 self.file.close()
                 print("Dumping complete.")
+                self.done = True
                 return False
         except Exception as e:
             print("Streaming failed: "+e)
             self.file.close()
+            self.done = True
             return False
 
     def on_error(self,status):
 
         print("Streaming failed: "+status)
     
+    def getFilename(self): # Returns file name
+        return self.filename
+    
+    def isDoneStreaming(self): #Check if streaming is complete:
+        return self.done
 #
 #if __name__ == '__main__':
 #    print("It's streaming...\n")
