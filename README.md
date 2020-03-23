@@ -8,14 +8,19 @@ To collect data from Twitter&reg; and perform data analytics as part of the Web 
 * Capturing and organising user and hashtag information
 * Report findings
 
-## Tools used
+## Libraries used
 * Tweepy API
 * MongoDB with pyMongo
+* dnspython
+* json
 * Pandas
 * Scikit-learn
+* nltk
+* numpy
+* time
 
-## How to use
+## How to use - Runs on python 3.8 
 * Clone the or download the zip file
 * Unzip the file
 * Open terminal
-* Run main.py on the terminal
+* Run "py main.py" on the terminal
