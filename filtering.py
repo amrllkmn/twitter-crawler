@@ -1,7 +1,7 @@
 import data_silo as d
 import imports as im
 
-def filter(collectionName):
+def filter(collectionName): #Filters data by removing duplicates and collecting the retweeted status as well as any original statuses
     x = im.time.time()
     print("Getting collection...")
     collection = d.getCollection(collectionName)
@@ -36,7 +36,7 @@ def filter(collectionName):
     finally:
         print("Filtering and insertion took: "+ "{0:.2f}".format(im.time.time()-x)+" seconds.")
 
-def REST_filter(collectionName):
+def REST_filter(collectionName): #Filters data by removing duplicates and collecting the retweeted status as well as any original statuses
     x = im.time.time()
     print("Getting collection...")
     collection = d.getCollection(collectionName)

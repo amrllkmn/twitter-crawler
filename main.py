@@ -51,7 +51,7 @@ if __name__ == '__main__':
     filtering.REST_filter(rest_collection) # The filtered collection will be called "rest_tweets_filtered"
 
     #Clustering
-    print("Getting collections ...") #obtain from mongodb
+    print("Getting collections ...") #obtain collection from mongodb
     stream_filtered = data_silo.getCollection("tweets_filtered").find()
     rest_filtered   = data_silo.getCollection("rest_tweets_filtered").find()
 
@@ -60,7 +60,7 @@ if __name__ == '__main__':
     df_rest = imports.pd.DataFrame(list(rest_filtered))
 
     print("removing stopwords...")
-    # combine both dataframes
+    # combining both dataframes
     df_major = imports.pd.concat([df_filtered,df_rest])
 
     df_major['text'] = df_major['text'].apply(lambda x:clustering.removeStopWords(x))
