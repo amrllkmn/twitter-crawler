@@ -1,4 +1,4 @@
-# The Arachne Twitter Crawler
+# Twitter Web Crawler
 ## Aim
 To collect data from Twitter&reg; and perform data analytics as part of the Web Science (H) coursework.
 
@@ -6,12 +6,13 @@ To collect data from Twitter&reg; and perform data analytics as part of the Web 
 * Stream 1% data from Twitter&reg;
 * Group data through content analysis
 * Capturing and organising user and hashtag information
-* Perform network analysis
 * Report findings
 
 ## Tools used
 * Tweepy API
-* Twitter API
+* MongoDB with pyMongo
+* Pandas
+* Scikit-learn
 
 ## How to use
 * Clone the or download the zip file
