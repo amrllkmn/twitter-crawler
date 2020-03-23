@@ -14,6 +14,7 @@ To collect data from Twitter&reg; and perform data analytics as part of the Web 
 * Twitter API
 
 ## How to use
-
+* Clone the or download the zip file
 * Unzip the file
+* Open terminal
 * Run main.py on the terminal

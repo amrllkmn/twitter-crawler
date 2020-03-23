@@ -14,9 +14,9 @@ if __name__ == '__main__':
     consumer_secret = tokens.consumer_secret
     access_token    = tokens.access_token
     access_secret   = tokens.access_token_secret
-    keywords = ["the","of", "and", "a","to"]
+    keywords = ["the","of", "and", "a","to"] # Change keywords here 
     #Streaming
-    listener = streaming.StdOutListener(30)
+    listener = streaming.StdOutListener(30)  # Takes in integer as seconds to stream data
     auth     = streaming.OAuthHandler(consumer_token, consumer_secret)
     auth.set_access_token(access_token, access_secret)
 
@@ -39,8 +39,8 @@ if __name__ == '__main__':
     #REST API
     api = imports.API(auth, wait_on_rate_limit=True)
     buffer = []
-    rest_api.REST_keyword_search(keywords,buffer,api)
-    rest_api.REST_users_search(topUsers,buffer,api)
+    rest_api.REST_keyword_search(keywords,buffer,api) #Search Twitter with the given keywords
+    rest_api.REST_users_search(topUsers,buffer,api)   #Searches the user timeline for the given list of users
     print("Saving to file: rest_tweets.json...")
     with open("rest_tweets.json","w", encoding="utf-8") as f:
         imports.json.dump(buffer,f,indent=4)
@@ -89,6 +89,7 @@ if __name__ == '__main__':
         print('\n')
 
     #From the collection
+    #Collections in the database will be called: "rest_tweets_filtered", "tweets_filtered"
     print("Getting mentions for: @realDonaldTrump...")
-    mentions = stats.getMentions("rest_tweets_filtered","realDonaldTrump")
+    mentions = stats.getMentions("rest_tweets_filtered","realDonaldTrump") #Takes in the name of the collection and the intended username
     print(mentions)
