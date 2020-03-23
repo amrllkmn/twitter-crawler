@@ -89,9 +89,6 @@ if __name__ == '__main__':
         print('\n')
 
     #From the collection
-    print("Getting mentions for: @realDonaldTrump")
-    stats.getMentions(rest_filtered,"realDonaldTrump")
-
-
-
-
+    print("Getting mentions for: @realDonaldTrump...")
+    mentions = stats.getMentions("rest_tweets_filtered","realDonaldTrump")
+    print(mentions)

@@ -13,15 +13,7 @@ To collect data from Twitter&reg; and perform data analytics as part of the Web 
 * Tweepy API
 * Twitter API
 
-## Updates
+## How to use
 
-* 9 February 2020
-    * Made the app on Twitter&reg; so credentials are obtained.
-* 13 February 2020
-    * The app can now store tweets collected.
-* 8 March 2020
-    * The REST API method has been created
-    * Added a get most retweeted function, but quite slow (not sure why ...)
-* 11 March 2020
-    * The timer functionality has been added.
-
+* Unzip the file
+* Run main.py
