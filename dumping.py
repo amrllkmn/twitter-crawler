@@ -6,7 +6,7 @@ def dumping(filename):
         with open(filename,"r", encoding="utf-8") as f:
                 print("Begin insertion to database...")
                 data = json.load(f)
-                d.db.tweet_dump.insert_many(data)
+                d.db[filename[:-5]].insert_many(data)
                 print("Insertion complete.")
     else:
         print("File is empty or doesn't exist")

@@ -12,7 +12,7 @@ def removeStopWords(text):
             words.append(word.lower())
     return ' '.join(word for word in words)
 
-def get_top_features_cluster(tf_idf_array, prediction, n_feats):
+def get_top_features_cluster(tf_idf_vectorizor,tf_idf_array, prediction, n_feats):
     labels = im.np.unique(prediction)
     dfs = []
     for label in labels:
@@ -26,10 +26,8 @@ def get_top_features_cluster(tf_idf_array, prediction, n_feats):
     return dfs
 
 
-print("getting collections ...") #obtain from mongodb
-filtered = d.filtered
-rest_filtered = d.rest_filtered
 
+"""
 print("creating dataframes...")
 df_filtered = im.pd.DataFrame(list(filtered))
 df_rest = im.pd.DataFrame(list(rest_filtered))
@@ -65,7 +63,7 @@ dfs = get_top_features_cluster(tf_idf_array, prediction, 15)
 for i in dfs:
     print(i)
     print('\n')
-"""
+
 number_clusters = range(1, 7)
 
 kmeans = [im.KMeans(n_clusters=i, max_iter = 600) for i in number_clusters]

@@ -132,8 +132,8 @@ dmypy.json
 .vscode/
 
 #Token files
-tokens.py
-data_silo.py
+#tokens.py
+#data_silo.py
 
 #twitter data
 tweets_1.json
@@ -141,6 +141,7 @@ tweets_2.json
 tweets.json
 tweet_dump.json
 rest_api.json
+rest_tweets.json
 
 #.png
 Elbow.png

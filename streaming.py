@@ -7,7 +7,7 @@ import tokens as t
 import json as j
 import data_silo as d
 import time
-from tweepy import OAuthHandler, Stream, StreamListener,API, Cursor
+from tweepy import OAuthHandler, Stream, StreamListener
 consumer_token = t.consumer_key
 consumer_secret = t.consumer_secret
 

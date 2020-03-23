@@ -15,4 +15,4 @@ def getMentions(collectionName,screenName):
 
     return frame
 
-getMentions("filtered","realDonaldTrump").to_csv("mentions.csv")
+#getMentions("filtered","realDonaldTrump").to_csv("mentions.csv")
