@@ -16,4 +16,4 @@ To collect data from Twitter&reg; and perform data analytics as part of the Web 
 ## How to use
 
 * Unzip the file
-* Run main.py
+* Run main.py on the terminal
